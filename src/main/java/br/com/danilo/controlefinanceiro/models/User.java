@@ -5,6 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.Valid;
+
+import br.com.danilo.controlefinanceiro.controllers.form.UserForm;
 
 @Entity
 @Table(name = "USER")
@@ -16,6 +19,13 @@ public class User {
 	private String name;
 	private String password;
 	
+	public User() {}
+	
+	public User(String username, String name, String password) {
+		this.username = username;
+		this.name = name;
+		this.password = password;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -39,6 +49,12 @@ public class User {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public void getValuesFrom(UserForm u) {
+		this.username = u.getUsername();
+		this.username = u.getUsername();
+		
 	}
 	
 }
