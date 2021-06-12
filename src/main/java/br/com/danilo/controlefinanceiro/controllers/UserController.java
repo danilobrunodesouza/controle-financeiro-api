@@ -19,13 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.danilo.controlefinanceiro.controllers.form.EntryForm;
 import br.com.danilo.controlefinanceiro.controllers.form.UserForm;
-import br.com.danilo.controlefinanceiro.dto.EntryDTO;
 import br.com.danilo.controlefinanceiro.dto.UserDTO;
-import br.com.danilo.controlefinanceiro.models.Entry;
 import br.com.danilo.controlefinanceiro.models.User;
-import br.com.danilo.controlefinanceiro.repository.EntryRepository;
 import br.com.danilo.controlefinanceiro.repository.UserRepository;
 
 @RestController
@@ -65,11 +61,9 @@ public class UserController {
 	@PutMapping("{id}")
 	@Transactional
 	public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody @Valid UserForm userForm, UriComponentsBuilder uriBuilder) {
-		Optional<User> optional = userRepository.findById(id);
+		User user = userForm.update(id, userRepository);
 		
-		if(optional.isPresent()) {
-			User user = optional.get();
-			user.getValuesFrom(userForm);
+		if(user != null) {			
 			return ResponseEntity.ok(new UserDTO(user));
 		} else {
 			return ResponseEntity.notFound().build();
@@ -77,8 +71,8 @@ public class UserController {
 			
 	}
 	
-	@Transactional
 	@DeleteMapping("{id}")
+	@Transactional
 	public ResponseEntity<?> removeEntry(@PathVariable Long id){
 		userRepository.deleteById(id);
 		return ResponseEntity.ok().build();

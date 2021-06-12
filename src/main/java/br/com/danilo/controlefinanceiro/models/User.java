@@ -5,7 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.Valid;
 
 import br.com.danilo.controlefinanceiro.controllers.form.UserForm;
 
@@ -51,10 +50,9 @@ public class User {
 		this.password = password;
 	}
 
-	public void getValuesFrom(UserForm u) {
-		this.username = u.getUsername();
-		this.username = u.getUsername();
-		
+	public void getValuesFrom(UserForm userForm) {
+		this.username = userForm.getUsername();
+		this.username = userForm.getUsername();	
 	}
 	
 }

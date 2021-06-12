@@ -1,6 +1,11 @@
 package br.com.danilo.controlefinanceiro.controllers.form;
 
+import java.util.Optional;
+
+import javax.transaction.Transactional;
+
 import br.com.danilo.controlefinanceiro.models.User;
+import br.com.danilo.controlefinanceiro.repository.UserRepository;
 
 public class UserForm {
 
@@ -31,6 +36,26 @@ public class UserForm {
 	
 	public User convert() {
 		return new User(username, name, password);
+	}
+	
+	@Transactional
+	public User update(Long id, UserRepository userRepository) {
+		Optional<User> optional = userRepository.findById(id);
+				
+		if(optional.isPresent()) {
+			User user = getUserUpdated(optional);
+			return user;
+		} else {
+			return null;
+		}
+		
+	}
+	private User getUserUpdated(Optional<User> optional) {
+		User user = optional.get();
+		user.setName(name);
+		user.setUsername(username);
+		user.setPassword(password);
+		return user;
 	}
 
 }
