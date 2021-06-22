@@ -9,6 +9,9 @@ public class CategoryForm {
 
 	@NotNull @NotEmpty
 	private String title;
+
+	@NotNull @NotEmpty
+	private String icon;
 	
 	public String getTitle() {
 		return title;
@@ -18,8 +21,15 @@ public class CategoryForm {
 	}
 	
 	public Category convert() {
-		return new Category(title);
+		return new Category(title, getIcon());
 	}
+	public String getIcon() {
+		return icon;
+	}
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+	
 
 
 		

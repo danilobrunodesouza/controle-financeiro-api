@@ -16,11 +16,13 @@ public class Category {
 	private Long id;
 	
 	private String title;
+	private String icon;
 	
 	public Category() {}
 	
-	public Category(String title) {
+	public Category(String title, String icon) {
 		this.title = title;
+		this.icon = icon;
 	}
 
 	public Long getId() {
@@ -30,9 +32,14 @@ public class Category {
 	public String getTitle() {
 		return title;
 	}
+	
+	public String getIcon() {
+		return icon;
+	}
 
 	public void getValuesFrom(@Valid CategoryForm form) {
 		this.title = form.getTitle();
+		this.icon = form.getIcon();
 	}
 	
 	

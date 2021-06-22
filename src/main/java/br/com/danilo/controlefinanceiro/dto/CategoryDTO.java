@@ -9,10 +9,12 @@ public class CategoryDTO {
 	
 	private Long id;
 	private String title;
+	private String icon;
 	
 	public CategoryDTO(Category category) {
 		this.id = category.getId();
 		this.title = category.getTitle();
+		this.setIcon(category.getIcon());
 	}
 
 	public static List<CategoryDTO> convert(List<Category> categories) {
@@ -33,6 +35,14 @@ public class CategoryDTO {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
 	}
 
 }
