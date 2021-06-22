@@ -6,10 +6,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.security.core.GrantedAuthority;
+
 @Entity
 @Table(name = "PROFILES")
-public class Profile {
+public class Profile implements GrantedAuthority{
 
+	private static final long serialVersionUID = 1L;
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
@@ -35,6 +38,11 @@ public class Profile {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public String getAuthority() {
+		return name;
 	}
 
 }
